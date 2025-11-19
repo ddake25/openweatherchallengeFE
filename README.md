@@ -3,37 +3,101 @@
 
 # Weather-Driven Health Risk Dashboard (Frontend)
 
-This is the React + TypeScript frontend for the **Weather-Driven Health Risk Dashboard**.
+## Overview
+React + TypeScript frontend for the **Weather-Driven Health Risk API**.  
+Provides an interactive dashboard that turns backend JSON into:
 
-It connects to the FastAPI backend to display:
+- Clear **risk cards** (asthma, heat, dehydration, overall)
+- A **24-hour risk timeline**
+- **AI-generated explanations** and an **action checklist**
+- Simple profile input (age + conditions)
 
-- **Today’s overall health risk** (asthma, heat, dehydration)
-- **Environmental snapshot** (temperature, humidity, AQI, PM2.5, PM10, O₃)
-- **Contributing factor charts** (what drives each risk)
-- **AI-generated health checklist + explanation**
-- **24-hour risk outlook**
+Designed to be fast, lightweight, and easy to plug into the backend (`openweatherchallengeBE`).
 
 
-## Key Features
+## What the Frontend Does
 
-- Clean, responsive layout built with **React + Vite + TypeScript**
-- **Tailwind CSS v4** via `@tailwindcss/postcss`
-- **Recharts** for donut/pie visualizations
-- Small, focused components:
-  - Risk summary card
-  - Environmental snapshot panel
-  - Contributing factors charts (asthma / heat / dehydration)
-  - Checklist + profile note + explanation
-  - Loading skeleton while waiting for backend + LLM
+- Lets the user:
+  - Enter a **city** (and optionally country code)
+  - Provide a basic **profile** (age + conditions like “asthma”)
+- Calls the backend `/analyze` endpoint
+- Renders:
+  - **Overall daily risk** badge/label
+  - **Asthma / Heat / Dehydration** risk cards
+  - **24-hour risk outlook** chart (time vs risk level)
+  - **LLM-generated explanation** (summary + detailed text)
+  - **Action checklist** with practical tips
+- Shows:
+  - Loading states while data is being fetched
+  - Error messages if the API is unreachable or returns an error
+- Mobile-friendly layout (responsive) using Tailwind CSS
 
+
+
+## High-Level Architecture
+
+- **UI Framework:** React + TypeScript
+- **Build Tool:** Vite
+- **Styling:** Tailwind CSS
+- **HTTP Client:** fetch / axios (depending on your actual implementation)
+- **Backend:** Expects the FastAPI service from `openweatherchallengeBE`
+
+Typical flow:
+
+1. User enters city + optional profile info.
+2. Frontend sends a POST request to `{API_BASE_URL}/analyze`.
+3. Receives JSON with:
+   - `scores`, `drivers`, `forecast`, `llm`, `weather`, `air_quality`, etc.
+
+4. Components map this into:
+   - Summary header
+   - Risk cards
+   - Timeline chart
+   - Explanation + checklist
+
+
+## UI Sections (Typical Layout)
+
+- **Header / Hero**
+  - App title + short tagline (weather → health risk insights)
+
+- **Input Panel**
+  - City input
+  - Optional country code
+  - Age field
+  - Conditions (comma-separated or tags)
+
+- **Risk Summary**
+  - Overall risk level (e.g., Low / Medium / High, A–E)
+  - Quick color-coded indicator
+
+- **Risk Detail Cards**
+  - Asthma / Respiratory risk
+  - Heat stress risk
+  - Dehydration risk
+  - Each with numeric level + short description
+
+- **24-Hour Outlook**
+  - Chart showing risk over the next 24 hours (e.g., line/bar chart)
+
+- **AI Explanation Panel**
+  - LLM-generated:
+    - Summary
+    - Detailed explanation
+    - Action checklist
+    - Optional note for the specific profile (e.g., “older adult with asthma”)
+
+- **Footer**
+  - Disclaimer and links (e.g., backend repo, OpenWeather)
 
 ## Tech Stack
 
-- **React 18** (with Vite)
-- **TypeScript**
-- **Tailwind CSS 4** (through `@tailwindcss/postcss` + PostCSS)
-- **Recharts** for charts
-- **Fetch API** to call the backend (`/api/health-risk`)
+- **Language:** TypeScript
+- **Framework:** React
+- **Tooling:** Vite
+- **Styling:** Tailwind CSS
+- **State Management:** React hooks / context (depending on your implementation)
+- **API:** Custom client for the FastAPI backend
 
 
 ## Setup & Installation
