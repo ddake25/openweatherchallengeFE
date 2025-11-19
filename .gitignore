@@ -1,0 +1,68 @@
+# -----------------------------------------
+# Node
+# -----------------------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# -----------------------------------------
+# Vite / Build output
+# -----------------------------------------
+dist/
+build/
+.cache/
+.temp/
+vite.config.ts.timestamp*
+
+# Vite server temp
+vite-error.log
+
+# -----------------------------------------
+# Environment Files
+# -----------------------------------------
+.env
+.env.*
+!.env.example
+
+# -----------------------------------------
+# Editor Settings
+# -----------------------------------------
+
+# VSCode
+.vscode/
+.history/
+.settings/
+
+# JetBrains
+.idea/
+*.iml
+
+# -----------------------------------------
+# System / OS
+# -----------------------------------------
+.DS_Store
+Thumbs.db
+
+# -----------------------------------------
+# Log files
+# -----------------------------------------
+*.log
+
+# -----------------------------------------
+# Tailwind & PostCSS
+# -----------------------------------------
+*.css.map
+.postcss-cache/
+tailwind-config.js.tmp
+postcss.config.js.tmp
+
+# -----------------------------------------
+# TypeScript
+# -----------------------------------------
+*.tsbuildinfo
+
